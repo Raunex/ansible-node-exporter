@@ -2,8 +2,8 @@
 - name: Install selinux python packages [RHEL]
   package:
     name:
-      - "{{ ( (ansible_facts.distribution_major_version | int) < 8) | ternary('libselinux-python') }}"
-      - "{{ ( (ansible_facts.distribution_major_version | int) < 8) | ternary('policycoreutils-python') }}"
+      - "{{ ( (ansible_facts.distribution_major_version | int) < 8) | ternary('libselinux-python','python3-libselinux') }}"
+      - "{{ ( (ansible_facts.distribution_major_version | int) < 8) | ternary('policycoreutils-python','python3-policycoreutils') }}"
     state: present
   register: _install_selinux_packages
   until: _install_selinux_packages is success
@@ -16,8 +16,8 @@
 - name: Install selinux python packages [Fedora]
   package:
     name:
-      - "{{ ( (ansible_facts.distribution_major_version | int) < 29) | ternary('libselinux-python') }}"
-      - "{{ ( (ansible_facts.distribution_major_version | int) < 29) | ternary('policycoreutils-python') }}"
+      - "{{ ( (ansible_facts.distribution_major_version | int) < 29) | ternary('libselinux-python','python3-libselinux') }}"
+      - "{{ ( (ansible_facts.distribution_major_version | int) < 29) | ternary('policycoreutils-python','python3-policycoreutils') }}"
     state: present
   register: _install_selinux_packages
   until: _install_selinux_packages is success
